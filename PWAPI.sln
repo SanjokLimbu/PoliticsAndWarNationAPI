@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PWAPI", "PWAPI\PWAPI.csproj", "{E2F998C3-F034-46C6-8F19-F663D106CAE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunPWAPI", "RunPWAPI\RunPWAPI.csproj", "{439905E2-744E-4C10-9833-2A8DE820799D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E2F998C3-F034-46C6-8F19-F663D106CAE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2F998C3-F034-46C6-8F19-F663D106CAE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2F998C3-F034-46C6-8F19-F663D106CAE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2F998C3-F034-46C6-8F19-F663D106CAE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{439905E2-744E-4C10-9833-2A8DE820799D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{439905E2-744E-4C10-9833-2A8DE820799D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{439905E2-744E-4C10-9833-2A8DE820799D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{439905E2-744E-4C10-9833-2A8DE820799D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {49FEA4C4-79B0-4165-A6B9-C08BFAF808A5}
+	EndGlobalSection
+EndGlobal
