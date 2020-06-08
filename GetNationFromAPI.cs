@@ -9,32 +9,44 @@ using System.Threading.Tasks;
 
 namespace PWAPI
 {
-    public  class GetNationFromAPI
+    public class GetNationFromAPI
     { 
         public static async Task GetNations()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["PWAPI"].ConnectionString;
             try
             {
-                string url = "http://politicsandwar.com/api/nations/?key={Value}";
+                string url = "https://politicsandwar.com/api/v2/nations/f2a61c3f288e6e/&format=1";
                 string response = await GetAPI.GetClient.GetStringAsync(url);
                 var obj = JsonConvert.DeserializeObject<RootObjectModel>(response);
                 using(SqlConnection con = new SqlConnection(connectionString))
                 {
-                    Console.WriteLine("Enter Table Name ");
+                    string deleteQuery = "DELETE FROM PW_Nation";
+                    SqlCommand com = new SqlCommand(deleteQuery, con);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    con.Close();
+                    Console.WriteLine("Enter Nation Table Name ");
                     Console.Write(">> ");
-                    string tblname = Console.ReadLine();
-                    string query = string.Format("insert into {0} (Nation_Id, Nation, Alliance_Id, Alliance) Values (@Nation_Id, @Nation, @Alliance_Id, @Alliance)", tblname);
-                    foreach (var data in obj.nations)
+                    string nationtblname = Console.ReadLine();
+                    string nationquery = string.Format("insert into {0} (Nation_Id, Nation, Alliance_Id, Alliance, Score, VacMode, Alliance_Position, soldiers, tanks, aircraft, ships) " +
+                        "Values (@Nation_Id, @Nation, @Alliance_Id, @Alliance, @Score, @VacMode, @Alliance_Position, @soldiers, @tanks, @aircraft, @ships)", nationtblname);
+                    foreach (var nations in obj.data)
                     {
-                        
-                        SqlCommand com = new SqlCommand(query, con);
+                        SqlCommand comm = new SqlCommand(nationquery, con);
                         con.Open();
-                        com.Parameters.AddWithValue("@Nation_Id", data.nationid);
-                        com.Parameters.AddWithValue("@Nation", data.nation);
-                        com.Parameters.AddWithValue("@Alliance_Id", data.allianceid);
-                        com.Parameters.AddWithValue("@Alliance", data.alliance);
-                        com.ExecuteNonQuery();
+                        comm.Parameters.AddWithValue("@Nation_Id", nations.nation_id);
+                        comm.Parameters.AddWithValue("@Nation", nations.nation);
+                        comm.Parameters.AddWithValue("@Alliance_Id", nations.alliance_id);
+                        comm.Parameters.AddWithValue("@Alliance", nations.alliance);
+                        comm.Parameters.AddWithValue("@Score", nations.score);
+                        comm.Parameters.AddWithValue("@VacMode", nations.v_mode);
+                        comm.Parameters.AddWithValue("@Alliance_Position", nations.alliance_position);
+                        comm.Parameters.AddWithValue("@soldiers", nations.soldiers);
+                        comm.Parameters.AddWithValue("@tanks", nations.tanks);
+                        comm.Parameters.AddWithValue("@aircraft", nations.aircraft);
+                        comm.Parameters.AddWithValue("@ships", nations.ships);
+                        comm.ExecuteNonQuery();
                         con.Close();
                     }
                 }
