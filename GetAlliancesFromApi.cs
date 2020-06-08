@@ -39,3 +39,13 @@ namespace PWAPI
         }
     }
 }
+/* This is my Stored Procedure
+CREATE PROCEDURE sp_add_data
+AS
+INSERT INTO PW_Alliance(Alliance_ID, Alliance, Score, Soldiers, Tanks, Aircraft, Ships)
+SELECT DISTINCT N.Alliance_id, N.Alliance, SUM(N.Score), SUM(N.Soldiers), SUM(N.Tanks), SUM(N.Aircraft), SUM(N.Ships)
+FROM PW_Nation AS N
+WHERE N.Alliance_Position != 0 AND N.VacMode = 0 AND N.Alliance_Id != 0
+GROUP BY N.Alliance_Id, N.Alliance
+Go
+*/
