@@ -1,0 +1,39 @@
+﻿@page
+@model MyWeb.Pages.AlliancePageModel
+@{
+    ViewData["Title"] = "AlliancePage";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>AlliancePage</h1>
+<html>
+<body>
+    <table style="width:100%" border="1">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Alliance</th>
+                <th>Score</th>
+                <th>Soldiers</th>
+                <th>Tanks</th>
+                <th>Aircraft</th>
+                <th>Ships</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var alliance in Model.alliances)
+            {
+                <tr>
+                    <td>@alliance.Allianceid</td>
+                    <td><a href="#" onclick="btn_Click" class="btn">@alliance.Alliance</a></td>
+                    <td>@alliance.Score</td>
+                    <td>@alliance.Soldiers</td>
+                    <td>@alliance.Tanks</td>
+                    <td>@alliance.Aircraft</td>
+                    <td>@alliance.Ships</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

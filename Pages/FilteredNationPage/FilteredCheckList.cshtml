@@ -1,0 +1,38 @@
+﻿@model MyWeb.Pages.FilteredNationPage.FilteredCheckListModel
+@{
+    ViewData["Title"] = "FilteredCheckList";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>FilteredCheckList</h1>
+<html>
+<body>
+    <table style="width:100%" border="1">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nation</th>
+                <th>Score</th>
+                <th>Soldiers</th>
+                <th>Tanks</th>
+                <th>Aircraft</th>
+                <th>Ships</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var nation in Model.nation)
+            {
+                <tr>
+                    <td>@nation.Nation_Id</td>
+                    <td>@nation.Nation</td>
+                    <td>@nation.Score</td>
+                    <td>@nation.Soldiers</td>
+                    <td>@nation.Tanks</td>
+                    <td>@nation.Aircraft</td>
+                    <td>@nation.Ships</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html> 
