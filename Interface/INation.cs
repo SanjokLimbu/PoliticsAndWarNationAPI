@@ -9,5 +9,6 @@ namespace PWAPI.Interface
     public interface INation
     {
         List<nation> GetAllNations();
+        IEnumerable<nation> GetAllianceUnits(int id);
     }
 }
