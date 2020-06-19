@@ -1,0 +1,37 @@
+﻿@page
+@model MyWeb.Pages.AlliancePage.AllianceDetailsModel
+@{
+    ViewData["Title"] = "AllianceDetails";
+}
+<h1>AlliancePage</h1>
+<html>
+<body>
+    <table style="width:100%" border="1">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nation</th>
+                <th>Score</th>
+                <th>Soldiers</th>
+                <th>Tanks</th>
+                <th>Aircraft</th>
+                <th>Ships</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var alliance in Model.MyNation)
+            {
+                <tr>
+                    <td>@alliance.Nation_Id</td>
+                    <td>@alliance.Nation</td>
+                    <td>@alliance.Score</td>
+                    <td>@alliance.Soldiers</td>
+                    <td>@alliance.Tanks</td>
+                    <td>@alliance.Aircraft</td>
+                    <td>@alliance.Ships</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
