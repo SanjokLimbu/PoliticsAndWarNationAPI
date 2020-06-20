@@ -1,14 +1,11 @@
-﻿using PoliticsAndWarAPIAccess.API.Models;
 using PWAPI.Interface;
 using PWAPI.Model;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 
 namespace PWAPI.Service
 {
@@ -30,7 +27,7 @@ namespace PWAPI.Service
             {
                 while (rdr.Read())
                 {
-                    _obj.Add(new nation() { Nation_Id = rdr.GetInt32(0), Nation = rdr.GetString(1),Alliance_Id = rdr.GetInt32(2), Alliance = rdr.GetString(3), Score = Math.Round(rdr.GetDouble(4), 2), Soldiers = rdr.GetInt32(5), Tanks = rdr.GetInt32(6), Aircraft = rdr.GetInt32(7), Ships = rdr.GetInt32(8) });
+                    _obj.Add(new nation() { Nation_Id = rdr.GetInt32(0), Nation = rdr.GetString(1), Alliance_Id = rdr.GetInt32(2), Alliance = rdr.GetString(3), Score = Math.Round(rdr.GetDouble(4), 2), Cities=rdr.GetInt32(5), Soldiers = rdr.GetInt32(6), Tanks = rdr.GetInt32(7), Aircraft = rdr.GetInt32(8), Ships = rdr.GetInt32(9) });
                 }
             }
             else
