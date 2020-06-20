@@ -15,6 +15,8 @@ namespace PoliticsAndWarAPIAccess.API.Models
         public string alliance { get; set; }
         [JsonProperty("score")]
         public float score { get; set; }
+        [JsonProperty("cities")]
+        public int Cities { get; set; }
         [JsonProperty("v_mode")]
         public bool v_mode { get; set; }
         [JsonProperty("alliance_position")]
