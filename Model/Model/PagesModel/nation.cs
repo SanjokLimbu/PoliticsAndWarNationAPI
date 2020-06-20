@@ -16,6 +16,8 @@ namespace PWAPI.Model
         [Required]
         public double Score { get; set; }
         [Required]
+        public int Cities { get; set; }
+        [Required]
         public int Soldiers { get; set; }
         [Required]
         public int Tanks { get; set; }
