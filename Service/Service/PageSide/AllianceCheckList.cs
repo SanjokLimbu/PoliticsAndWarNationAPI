@@ -1,11 +1,10 @@
-﻿using PWAPI.Interface;
+using PWAPI.Interface;
 using PWAPI.Model;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Text;
 
 namespace PWAPI.Service
 {
@@ -27,7 +26,7 @@ namespace PWAPI.Service
             {
                 while (rdr.Read())
                 {
-                    _Alliance.Add(new alliance() { Allianceid = rdr.GetInt32(0), Alliance = rdr.GetString(1), Score = Math.Round(rdr.GetDouble(2), 2), Soldiers = rdr.GetInt32(3), Tanks = rdr.GetInt32(4), Aircraft = rdr.GetInt32(5), Ships = rdr.GetInt32(6) });
+                    _Alliance.Add(new alliance() { Allianceid = rdr.GetInt32(0), Alliance = rdr.GetString(1), Score = Math.Round(rdr.GetDouble(2), 2), Cities = rdr.GetInt32(3), Soldiers = rdr.GetInt32(4), Tanks = rdr.GetInt32(5), Aircraft = rdr.GetInt32(6), Ships = rdr.GetInt32(7) });
                 }
             }
             else
