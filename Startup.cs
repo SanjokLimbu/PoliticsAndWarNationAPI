@@ -33,7 +33,7 @@ namespace MyWeb
         private static async Task<ElapsedEventHandler> OnTimedEventAsync()
         {
             GetAPI.InitializeClient();
-            await GetNationFromAPI.GetNations();
+            await GetNationFromAPI.GetNation();
             GetAlliancesFromApi.GetAlliance();
             throw new Exception();
         }
