@@ -83,12 +83,17 @@ namespace MyWeb
             app.UseAuthentication();
 
             app.UseRouting();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllerRoute(
+                    name: "Logouts",
+                    pattern: "{controller=Account}/{action=Logout}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "Accounts",
+                    pattern: "{controller=Account}/{action=Register}/{id?}");
             });
         }
     }
