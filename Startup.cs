@@ -52,6 +52,12 @@ namespace MyWeb
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<Dcontext>();
             services.AddMvc().AddXmlSerializerFormatters();
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    options.ClientId = ConfigurationManager.AppSettings["ClientId"];
+                    options.ClientSecret = ConfigurationManager.AppSettings["ClientSecret"];
+                });
 
             services.AddRazorPages();
             services.AddDistributedMemoryCache();
