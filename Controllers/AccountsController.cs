@@ -69,7 +69,14 @@ namespace PWWebApplication.Controllers
                 var result = await signInManager.PasswordSignInAsync(login.Email, login.Password, login.RememberMe, false);
                 if (result.Succeeded)
                 {
-                    return RedirectToPage("/Index");
+                    if (!string.IsNullOrEmpty(returnUrl))
+                    {
+                        return LocalRedirect(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToPage("/Index");
+                    }
                 }
                 ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
                 
