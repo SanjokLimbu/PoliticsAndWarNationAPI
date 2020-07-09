@@ -6,6 +6,7 @@ Sorted data for alliance in another table.
 Displayed Nation and alliance military level in their respective page.
 Each alliances nation and their respective military can be viewed as well.
 Added Register and login including google login.
+Added email verification.
 however, There are no restricted pages that can be viewed right now
 I will add a page to draw chart only accessible after login.
 Stay Tuned.
