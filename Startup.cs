@@ -54,7 +54,8 @@ namespace MyWeb
             {
                 options.SignIn.RequireConfirmedEmail = true;
             })
-            .AddEntityFrameworkStores<Dcontext>();
+            .AddEntityFrameworkStores<Dcontext>()
+            .AddDefaultTokenProviders();
             services.AddMvc().AddXmlSerializerFormatters();
             services.AddAuthentication()
                 .AddGoogle(options =>
