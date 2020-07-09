@@ -49,8 +49,12 @@ namespace MyWeb
         {
             services.AddDbContextPool<Dcontext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("connection")));
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<Dcontext>();
+            services.AddIdentity<IdentityUser, IdentityRole>(
+           options => 
+            {
+                options.SignIn.RequireConfirmedEmail = true;
+            })
+            .AddEntityFrameworkStores<Dcontext>();
             services.AddMvc().AddXmlSerializerFormatters();
             services.AddAuthentication()
                 .AddGoogle(options =>
@@ -97,6 +101,9 @@ namespace MyWeb
                 endpoints.MapControllerRoute(
                     name: "Logouts",
                     pattern: "{controller=Account}/{action=Logout}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "confirmEmail",
+                    pattern: "{controller=Accounts}/{action=confirmEmail}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "Accounts",
                     pattern: "{controller=Account}/{action=Register}/{id?}");
