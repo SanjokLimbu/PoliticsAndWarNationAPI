@@ -16,26 +16,24 @@ using System.Timers;
 
 namespace MyWeb
 {
-    public class Startup
+   public class Startup
     {
         private static Timer atimer;
-        public static async Task Main()
+        public static void ThisTimer()
         {
             atimer = new Timer
             {
-                Interval = 3600000
+                Interval = 3600000 //1 hour
             };
-            atimer.Elapsed += await OnTimedEventAsync();
+            atimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
             atimer.AutoReset = true;
             atimer.Enabled = true;
         }
-
-        private static async Task<ElapsedEventHandler> OnTimedEventAsync()
+        private async static void OnTimedEvent(object source, ElapsedEventArgs e)
         {
-            GetAPI.InitializeClient();
-            await GetNationFromAPI.GetNation();
-            GetAlliancesFromApi.GetAlliance();
-            throw new Exception();
+            GetApi.InitializeClient();
+            await GetAllNation.GetNation();
+            GetAllAlliances.GetAlliance();
         }
         public Startup(IConfiguration configuration)
         {
@@ -47,31 +45,25 @@ namespace MyWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContextPool<Dcontext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("connection")));
-            services.AddIdentity<IdentityUser, IdentityRole>(
-           options => 
+            services.AddRazorPages();
+            services.AddSingleton<INations, NationCheckList>();
+            services.AddSingleton<IAlliance, AllianceCheckList>();
+
+            services.AddDbContext<DContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("connection")));
+            services.AddIdentity<IdentityUser, IdentityRole>(options => 
             {
                 options.SignIn.RequireConfirmedEmail = true;
-            })
-            .AddEntityFrameworkStores<Dcontext>()
+            }).AddEntityFrameworkStores<DContext>()
             .AddDefaultTokenProviders();
-            services.AddMvc().AddXmlSerializerFormatters();
             services.AddAuthentication()
                 .AddGoogle(options =>
                 {
                     options.ClientId = ConfigurationManager.AppSettings["ClientId"];
                     options.ClientSecret = ConfigurationManager.AppSettings["ClientSecret"];
                 });
-
-            services.AddRazorPages();
-            services.AddDistributedMemoryCache();
-            services.AddSession();
-            services.AddSingleton<INation, NationCheckList>();
-            services.AddSingleton<IAlliance, AllianceCheckList>();
-
-            // Add framework services.
-            services.AddMvc();
+            services.AddTransient<IMailService, SendGridMailService>();
+            services.AddMvc().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
