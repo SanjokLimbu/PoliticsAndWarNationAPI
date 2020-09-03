@@ -9,5 +9,6 @@ Added Register and login including google login.
 Added email verification.
 however, There are no restricted pages that can be viewed right now
 I will add a page to draw chart only accessible after login.
-Stay Tuned.
+I am now adding custom authorization
+and restricting some pages for viewers if not logged in.
 Thank you
