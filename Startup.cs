@@ -71,6 +71,7 @@ namespace MyWeb
                 .Build();
                 config.Filters.Add(new AuthorizeFilter(policy));
             ).AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
+            services.ConfigureApplicationCookie(options => options.LoginPath = "/Accounts/Logins");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
