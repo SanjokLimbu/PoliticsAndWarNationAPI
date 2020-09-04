@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PW.Interface;
 using PW.Model.RegisterModel;
@@ -24,12 +25,14 @@ namespace PWWebApplication.Controllers
         }
         //Returns Register page by typing in URL
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Registers()
         {
             return View();
         }
         //Creates new user and if succeeded returned to home page
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Registers(Registration registration)
         {
             if (ModelState.IsValid)
@@ -56,6 +59,7 @@ namespace PWWebApplication.Controllers
         }
         //Confirms email after user clicks the link provided in their email
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string userId, string token)
         {
             if(userId == null || token == null)
@@ -78,6 +82,7 @@ namespace PWWebApplication.Controllers
         }
         //logout user
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
@@ -85,6 +90,7 @@ namespace PWWebApplication.Controllers
         }
         //Returns login url from external login such as google
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Logins(string returnUrl)
         {
             Login model = new Login
@@ -96,6 +102,7 @@ namespace PWWebApplication.Controllers
         }
         //logs in user with our own register form
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Logins(Login login, string returnUrl)
         {
             login.ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -127,6 +134,7 @@ namespace PWWebApplication.Controllers
         //External login(google) button in layout
         //redirects to google's signin page and then back to our application
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult ExternalLogin(string provider, string returnUrl)
         {
             var redirectUrl = Url.Action("ExternalLoginCallback", "Accounts",
@@ -134,6 +142,7 @@ namespace PWWebApplication.Controllers
             var properties = signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
             return new ChallengeResult(provider, properties);
         }
+        [AllowAnonymous]
         //Handles authenticated identity returned from google
         public async Task<IActionResult>ExternalLoginCallback(string returnUrl = null, string remoteError = null)
         {
