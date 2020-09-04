@@ -13,6 +13,8 @@ using PWAPI.Service;
 using System;
 using System.Threading.Tasks;
 using System.Timers;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace MyWeb
 {
@@ -63,7 +65,12 @@ namespace MyWeb
                     options.ClientSecret = ConfigurationManager.AppSettings["ClientSecret"];
                 });
             services.AddTransient<IMailService, SendGridMailService>();
-            services.AddMvc().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
+            services.AddMvc(config => {
+                var policy = new AuthorizationPolicyBuilder()
+                .RequireAuthenticatedUser()
+                .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            ).AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
